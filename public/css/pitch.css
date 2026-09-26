@@ -130,8 +130,8 @@
   /* The ruled paper look: a hairline gold spine down the left of every slide, and one thin
      gradient so the eye lands on the top-left corner rather than in the middle of the text. */
   background:
-    linear-gradient(180deg, rgba(212, 175, 55, 0.035) 0%, rgba(13, 10, 8, 0) 42%),
-    radial-gradient(1200px 620px at 12% -10%, rgba(212, 175, 55, 0.055), rgba(13, 10, 8, 0) 70%);
+    linear-gradient(180deg, rgba(0, 229, 138, 0.035) 0%, rgba(13, 10, 8, 0) 42%),
+    radial-gradient(1200px 620px at 12% -10%, rgba(0, 229, 138, 0.055), rgba(13, 10, 8, 0) 70%);
 }
 
 .pitch-slide::before {
@@ -282,7 +282,7 @@
   background: linear-gradient(180deg, #3d3018 0%, #2a2010 100%);
   border-color: var(--accent-gold);
   color: var(--accent-gold-light);
-  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 0 0 1px rgba(0, 229, 138, 0.25);
 }
 
 .pitch-dot-label {
@@ -375,7 +375,7 @@
 
 .pitch-quote {
   border-left: 3px solid var(--accent-gold);
-  background: linear-gradient(90deg, rgba(212, 175, 55, 0.09), rgba(0, 0, 0, 0));
+  background: linear-gradient(90deg, rgba(0, 229, 138, 0.09), rgba(0, 0, 0, 0));
   padding: 16px 22px;
   max-width: 96ch;
 }
@@ -441,7 +441,7 @@
   line-height: 1.05;
   letter-spacing: 0.5px;
   color: var(--text-primary);
-  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7), 0 0 60px rgba(212, 175, 55, 0.16);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.7), 0 0 60px rgba(0, 229, 138, 0.16);
 }
 
 .pitch-cover-tagline {
@@ -960,7 +960,7 @@
 
 .pitch-link:hover {
   border-color: var(--accent-gold);
-  background: rgba(212, 175, 55, 0.07);
+  background: rgba(0, 229, 138, 0.07);
   transform: translateY(-1px);
 }
 
@@ -1069,7 +1069,7 @@
     --text-primary: #14100c;
     --text-secondary: #332c22;
     --text-muted: #6a6155;
-    --accent-gold: #8a6d1f;
+    --accent-gold: #0b7a4b;
     --accent-gold-light: #6d5413;
     --accent-gold-dim: #8a7a44;
     --border-base: #c9bfa8;

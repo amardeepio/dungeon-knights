@@ -25,3 +25,8 @@ private-key.txt
 /points/
 /tools/
 /docs/
+# The source-art trees, whose served copies all live under public/. The six
+# assets/ui/*.png files that tools/extract-sprites.js still reads as build
+# inputs are the only reason any of this needs to exist on disk.
+/assets/
+/maps/

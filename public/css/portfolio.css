@@ -212,7 +212,7 @@
     font-size: 30px;
     line-height: 1;
     color: var(--accent-gold);
-    text-shadow: 0 0 24px rgba(212, 175, 55, 0.18);
+    text-shadow: 0 0 24px rgba(0, 229, 138, 0.18);
 }
 
 .pf-hero-label {
@@ -487,7 +487,7 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--accent-gold);
-    background: rgba(212, 175, 55, 0.12);
+    background: rgba(0, 229, 138, 0.12);
     border: 1px solid var(--border-gold, var(--border-base));
     border-radius: 999px;
     padding: 2px 8px;

@@ -74,7 +74,7 @@ body::before {
     padding: 20px;
     background: linear-gradient(
         180deg,
-        rgba(212, 175, 55, 0.1) 0%,
+        rgba(0, 229, 138, 0.1) 0%,
         transparent 100%
     );
     border-radius: 12px;
@@ -113,13 +113,13 @@ body::before {
         box-shadow: 
             0 20px 60px rgba(0, 0, 0, 0.8),
             inset 0 0 60px rgba(0, 0, 0, 0.6),
-            0 0 40px rgba(212, 175, 55, 0.3);
+            0 0 40px rgba(0, 229, 138, 0.3);
     }
     50% {
         box-shadow: 
             0 20px 60px rgba(0, 0, 0, 0.8),
             inset 0 0 60px rgba(0, 0, 0, 0.6),
-            0 0 60px rgba(212, 175, 55, 0.5);
+            0 0 60px rgba(0, 229, 138, 0.5);
     }
 }
 
@@ -485,7 +485,7 @@ body::before {
     box-shadow: 
         0 12px 24px rgba(0, 0, 0, 0.7),
         inset 0 2px 0 rgba(255, 255, 255, 0.1),
-        0 0 30px rgba(212, 175, 55, 0.5);
+        0 0 30px rgba(0, 229, 138, 0.5);
     border-color: var(--medieval-gold-light);
 }
 
@@ -525,7 +525,7 @@ body::before {
         rgba(139, 92, 246, 0.2) 0%,
         rgba(0, 0, 0, 0.6) 100%
     );
-    border: 3px solid rgba(212, 175, 55, 0.3);
+    border: 3px solid rgba(0, 229, 138, 0.3);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -589,7 +589,7 @@ body::before {
 .stat-value-bar {
     height: 24px;
     background: rgba(0, 0, 0, 0.6);
-    border: 2px solid rgba(212, 175, 55, 0.4);
+    border: 2px solid rgba(0, 229, 138, 0.4);
     border-radius: 12px;
     overflow: hidden;
     position: relative;

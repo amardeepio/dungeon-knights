@@ -74,9 +74,16 @@ function rec(label, pass, detail) {
 
     // ------------------------------------------------------------------- the phone variant
     const phoneBlock = (css.match(/@media \(max-width: 760px\) \{[\s\S]*?\n\}/) || [''])[0];
-    rec('phones never select a video source at all', /\.home-video\s*\{\s*display:\s*none/.test(phoneBlock));
-    rec('phones paint the small background', phoneBlock.includes('menu-background-mobile.webp'));
-    rec('reduced motion gets the same picture, without the phone rule',
+    // This used to assert that a phone never selected a video source at all, which was true while
+    // the rule was `.home-video { display: none }`. Phones now get a 495 KB cut of the loop instead,
+    // so the saving moved from "no video" to "a much smaller video" — and the thing worth asserting
+    // is the size of that cut, plus the fact that the choice is made in the markup's `media`
+    // attributes rather than by hiding the element in two places at once.
+    rec('phones get the small background behind the video',
+        phoneBlock.includes('menu-background-mobile.webp'));
+    rec('the phone block no longer hides the video outright',
+        !/\.home-video\s*\{\s*display:\s*none/.test(phoneBlock));
+    rec('reduced motion gets no video on any screen',
         /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.home-video\s*\{\s*display:\s*none/.test(css));
 
     // ------------------------------------------------------------- thumb and keyboard quality
@@ -97,11 +104,25 @@ function rec(label, pass, detail) {
     // Read the <source> tags themselves, not the body text: the comment above them names both files,
     // so an indexOf over the whole string answers a different question than the one being asked.
     const sources = [...body.matchAll(/<source src="([^"]+)"/g)].map((m) => m[1]);
-    rec('the reserved landing-loop name is still first, so the new footage can drop in',
-        sources[0] === '/assets/landing-loop.mp4' && sources[1] === '/assets/intro-web.mp4',
-        sources.join(' then '));
-    rec('the second source is the web-sized master, not the 37 MB one',
-        body.includes('/assets/intro-web.mp4') && !/\/assets\/intro\.mp4/.test(body));
+    // One file for every screen. This replaced a four-rung ladder that gave wide viewports a 1080p
+    // cut and phones a 495 KB one, with the choice expressed in `media` attributes per source.
+    // Asserted here because the two failure modes are both quiet: a `media` attribute creeping onto
+    // the single source would silently exclude every phone, and a second source added above it
+    // would silently become the one everybody plays.
+    rec('every screen is offered the same one file, ungated',
+        sources.length === 1
+        && sources[0] === '/assets/intro-web.mp4'
+        && !/<source[^>]*media=/.test(body),
+        `${sources.length} source(s): ${sources.join(' then ')}`);
+    // Comments stripped, because the body explains itself in prose that names these very files.
+    // Writing that explanation honestly — "the 29 seconds of `/assets/intro.mp4` re-encoded to…" —
+    // is exactly what a body-wide regex cannot tell apart from an attribute pointing at the 35 MB
+    // original. The two failures below are about what the browser is TOLD to fetch, so they read
+    // markup, not commentary. (This is the same hazard the note above the `<source>` reader warns
+    // about, arriving from the other direction.)
+    const bodyMarkup = body.replace(/<!--[\s\S]*?-->/g, '');
+    rec('the web-sized master is the one served, never the 35 MB one',
+        bodyMarkup.includes('/assets/intro-web.mp4') && !/\/assets\/intro\.mp4/.test(bodyMarkup));
     rec('the poster is the WebP, not the 965 KB JPEG',
         body.includes('poster="/assets/images/menu-background.webp"')
         && !body.includes('poster="/assets/images/menu-background.jpg"'));
@@ -126,7 +147,12 @@ function rec(label, pass, detail) {
 
     // ------------------------------------------------------------------- the weights
     const assets = [
-        ['public/assets/intro-web.mp4', 5 * 1024 * 1024, 'the loop the desktop plays'],
+        // The 4 MB ceiling below is not arbitrary. This was a VBV-constrained encode of the 35 MB
+        // master, not a CRF one: at CRF the same footage came out at 7.9 MB even at crf 28, because
+        // the master is 10.2 Mbps of dense detail. Capping the bitrate is the only way to hold a
+        // ceiling, so the ceiling is asserted here — otherwise the next person to re-encode does it
+        // their way and the apex quietly starts serving 13 MB again.
+        ['public/assets/intro-web.mp4', 5 * 1024 * 1024, 'the loop every screen plays'],
         ['public/assets/images/menu-background.webp', 400 * 1024, 'the background, 1920px'],
         ['public/assets/images/menu-background-mobile.webp', 150 * 1024, 'the background, 900px'],
         ['public/assets/ui/sword-crest.png', 50 * 1024, 'the wordmark crest'],
@@ -140,7 +166,7 @@ function rec(label, pass, detail) {
     const mob = size('public/assets/images/menu-background-mobile.webp');
     rec('the phone background is genuinely the smaller one', mob < desk, `${kb(mob)} < ${kb(desk)}`);
     rec('the 37 MB master is still on disk for /hub, just not on this page',
-        size('public/assets/intro.mp4') > 30 * 1024 * 1024 && !/\/assets\/intro\.mp4/.test(body),
+        size('public/assets/intro.mp4') > 30 * 1024 * 1024 && !/\/assets\/intro\.mp4/.test(bodyMarkup),
         `${kb(size('public/assets/intro.mp4'))}`);
 
     console.log('');

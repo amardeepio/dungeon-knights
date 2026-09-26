@@ -1,0 +1,136 @@
+/* ==========================================================
+   THE DESIGN SYSTEM — one font, one palette, app-wide.
+
+   This is the only Tailwind entry point, and it does two jobs.
+
+   1. It carries Tailwind's utilities, with the apex page's terminal look as the theme
+      (`tailwind.config.js` — one phosphor green on near-black, JetBrains Mono throughout).
+   2. More importantly, it RE-POINTS the custom properties that `public/theme.css` defines.
+
+   That second job is why this file exists in this shape. The app is 22,400 lines of hand-written
+   CSS across 37 files in `public/`, and 1,332 of its colour references go through `var(--token)`
+   rather than naming a hex. Those sheets cannot be given Tailwind classes — most of their markup is
+   an HTML string in `lib/static-pages.js`, not JSX — but they all read the same tokens. Redefining
+   the tokens here moves all 1,332 of them at once, which is the difference between one font and
+   one palette across the app now, and 22,400 lines rewritten by hand.
+
+   The tokens are declared in Tailwind's `base` layer, on a selector more specific than the one that
+   defines them today, so the replacement is decided by specificity rather than by which file a
+   framework happened to inject last. See the note on `html:root` below for the measurement.
+
+   What this does NOT reach: 2,119 colour references in `public/` name a hex or an `rgb()` directly
+   and are untouched. Those are the remaining work, and they are listed per-file in the migration
+   notes rather than hidden here.
+   ========================================================== */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* `html:root`, NOT `:root`.
+   *
+   * This block has to beat `public/theme.css`, which also declares these tokens on `:root` — and it
+   * cannot do it on source order, because it loses. `app/globals.css` is imported by the root
+   * layout and lands in <head>, while `theme.css` is injected further down the document by the
+   * legacy page renderer (`app/legacy-page.js`). Measured on the served `/`, the order is:
+   *
+   *     1  /_next/static/css/app/layout.css   <- this file
+   *     2  /theme.css?v=8                      <- the tokens being replaced
+   *     3  /css/home.css?v=5
+   *
+   * Two unlayered stylesheets of equal specificity are decided by which comes last, so a plain
+   * `:root` here would be silently overwritten and the app would keep its gold. One extra element
+   * in the selector raises this to (0,1,1) against theme.css's (0,1,0), which wins wherever the
+   * two files happen to be ordered. That is the only order-independent lever available, and order
+   * here is not something either file controls.
+   *
+   * It also outranks `public/css/landing.css` and `public/css/pitch.css`, which each set
+   * `--accent-gold` on their own `:root`. That is intended: those were near-identical golds, and
+   * unifying them is the point.
+   */
+  html:root {
+    /* ---------------------------------------------------------- surfaces
+     * The old ramp was warm stone (#0D0A08 → #2A2520) and every step of it was tinted brown, so
+     * leaving any one of them in place would read as a brown smudge on a green screen. The new
+     * ramp is neutral-cool and the steps are closer together, because a terminal's surfaces differ
+     * by a hair and by a border, not by hue. */
+    --bg-void:    #040607;
+    --bg-dark:    #06080A;
+    --bg-panel:   #0B0F11;
+    --bg-raised:  #101618;
+    --bg-input:   #080B0C;
+    --bg-hover:   #16201D;
+
+    /* ---------------------------------------------------------- borders
+     * Bronze and gold become phosphor at three strengths. The dim step is the one that carries
+     * most panels, so it is the one tuned to stay visible against `--bg-panel` without competing
+     * with the accent. */
+    --border-dim:   #16241F;
+    --border-base:  #1E3A30;
+    --border-bronze:#0B7A4B;
+    --border-gold:  #00E58A;
+
+    /* ---------------------------------------------------------- accent
+     * The three golds collapse onto one green. `--accent-gold` is the name 1,332 references use, so
+     * it keeps the name and changes the value; renaming it would mean touching every call site for
+     * no gain. */
+    --accent-gold:       #00E58A;
+    --accent-gold-light: #7CFFB2;
+    --accent-gold-dim:   #0B7A4B;
+
+    /* ---------------------------------------------------------- text */
+    --text-primary:   #D6FFE9;
+    --text-secondary: #8FA79B;
+    --text-muted:     #4E6B5C;
+    --text-gold:      #00E58A;
+
+    /* ---------------------------------------------------------- dungeon tints
+     * These identify the five dungeons and are used to colour a map border, a floor and a label.
+     * They stay distinct from each other, because that is the job: telling two dungeons apart at a
+     * glance. They are pulled toward the green ramp but stay far enough apart to remain tellable,
+     * and none of them is the accent — a map that glowed the same green as every button would read
+     * as one thing. */
+    --tint-crypts: #6FD3E8;
+    --tint-magma:  #E8703A;
+    --tint-mines:  #00E58A;
+    --tint-temple: #C8B47A;
+    --tint-void:   #A98BE0;
+
+    /* ---------------------------------------------------------- status
+     * Danger and success are unchanged: red and green are the two colours a player must never have
+     * to learn, and re-tuning them to fit a palette is how a "loses a fight" state stops looking
+     * like one. */
+    --danger:       #E5484D;
+    --danger-hover: #F16A6E;
+    --success:      #00E58A;
+
+    /* ---------------------------------------------------------- typography
+     * THE change with the widest reach in this file. All three faces become JetBrains Mono. The apex
+     * sets its wordmark, its body and its buttons in the mono, and the game's own screens now do
+     * too, so the site is one voice rather than a medieval site with a terminal front door.
+     *
+     * Cinzel and Inter are still fetched (see `FONT_CSS` in `app/layout.js`) because the sheets
+     * that hardcode a family name rather than a token — 2,119 references, the migration noted above —
+     * still ask for them by name. Dropping them from that URL is the last step of the migration,
+     * not this one. */
+    --font-display: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+    --font-heading: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+    --font-body:    'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+    /* ---------------------------------------------------------- sizing
+     * Radii go to zero. A rounded rectangle is a consumer app; this is a readout. The names are
+     * kept for the same reason the golds were: 1,332 call sites, no reason to rename. */
+    --radius-sm:   0px;
+    --radius-md:   0px;
+    --radius-lg:   0px;
+
+    /* ---------------------------------------------------------- shadows
+     * The old ramp cast dark shadows for depth, which on near-black is invisible. Depth now comes
+     * from the accent's own glow, which is the one shadow the terminal look actually has. */
+    --shadow-sm:    0 0 12px rgba(0, 229, 138, 0.10);
+    --shadow-md:    0 0 20px rgba(0, 229, 138, 0.16);
+    --shadow-lg:    0 0 34px rgba(0, 229, 138, 0.28);
+    --shadow-inset: 0 0 0 1px rgba(0, 229, 138, 0.18);
+  }
+}

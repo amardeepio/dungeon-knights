@@ -92,7 +92,7 @@
   font-size: 10px;
   letter-spacing: 1.6px;
   text-transform: uppercase;
-  color: var(--accent-gold, #d4a843);
+  color: var(--accent-gold, #00e58a);
   margin-bottom: 4px;
   padding-right: 16px;   /* clears the dismiss button */
   display: flex;
@@ -104,7 +104,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--accent-gold, #d4a843);
+  background: var(--accent-gold, #00e58a);
   box-shadow: 0 0 8px rgba(212, 168, 67, 0.9);
   flex-shrink: 0;
 }
@@ -142,7 +142,7 @@
 }
 
 .arya-close:hover {
-  color: var(--accent-gold, #d4a843);
+  color: var(--accent-gold, #00e58a);
   background: rgba(212, 168, 67, 0.12);
 }
 
@@ -216,7 +216,7 @@
 
 .arya-tour-dots span.is-done { background: rgba(212, 168, 67, 0.6); }
 .arya-tour-dots span.is-on {
-  background: var(--accent-gold, #d4a843);
+  background: var(--accent-gold, #00e58a);
   transform: scale(1.5);
 }
 
@@ -243,13 +243,13 @@
 
 .arya-tour-btn:hover:not(:disabled) {
   color: var(--accent-gold, #e8c56b);
-  border-color: var(--accent-gold, #d4a843);
+  border-color: var(--accent-gold, #00e58a);
 }
 
 .arya-tour-btn:disabled { opacity: 0.4; cursor: default; }
 
 .arya-tour-btn.is-primary {
-  background: linear-gradient(180deg, #d4a843 0%, #a8792a 100%);
+  background: linear-gradient(180deg, #00e58a 0%, #a8792a 100%);
   border-color: #e8c56b;
   color: #1a1409;
   font-weight: 700;

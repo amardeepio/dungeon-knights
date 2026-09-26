@@ -189,7 +189,7 @@ room it actually needs, and the height that buys is spent on the tap target rath
     min-width: 15px;
     padding: 0 4px;
     border-radius: 8px;
-    background: var(--accent-gold, #d4a843);
+    background: var(--accent-gold, #00e58a);
     color: #14100a;
     font-size: 9px;
     line-height: 15px;
@@ -1070,7 +1070,7 @@ rule serves the wide pane, a tablet and a phone without three declarations to ke
 .dungeon-timer-text {
     font-size: 12px;
     font-variant-numeric: tabular-nums;
-    color: var(--accent-gold, #d4a843);
+    color: var(--accent-gold, #00e58a);
     min-width: 54px;
 }
 
@@ -1093,7 +1093,7 @@ rule serves the wide pane, a tablet and a phone without three declarations to ke
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: var(--accent-gold, #d4a843);
+    color: var(--accent-gold, #00e58a);
     border: 1px solid rgba(212, 168, 67, 0.4);
     border-radius: 4px;
     padding: 4px 10px;
@@ -1122,7 +1122,7 @@ rule serves the wide pane, a tablet and a phone without three declarations to ke
     font-family: var(--font-display, Cinzel, serif);
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--accent-gold, #d4a843);
+    color: var(--accent-gold, #00e58a);
     opacity: 0.8;
 }
 
@@ -1175,7 +1175,7 @@ rule serves the wide pane, a tablet and a phone without three declarations to ke
     font-family: var(--font-display, Cinzel, serif);
     font-size: 15px;
     letter-spacing: 2px;
-    color: var(--accent-gold, #d4a843);
+    color: var(--accent-gold, #00e58a);
 }
 
 .dungeon-complete {
@@ -1192,7 +1192,7 @@ rule serves the wide pane, a tablet and a phone without three declarations to ke
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--accent-gold, #d4a843);
+    color: var(--accent-gold, #00e58a);
     text-shadow: 0 0 24px rgba(212, 168, 67, 0.45);
 }
 
@@ -1218,7 +1218,7 @@ rule serves the wide pane, a tablet and a phone without three declarations to ke
 
 .dungeon-btn.is-shared {
     opacity: 1;
-    border-color: var(--accent-gold, #d4a843);
+    border-color: var(--accent-gold, #00e58a);
 }
 
 /* ---------------------------------------------------------------------------
@@ -1329,10 +1329,10 @@ link, and X is asked about it before anything is paid.
 .x-share-carry {
     margin: 0;
     padding: 8px 9px;
-    border: 1px solid rgba(212, 175, 55, 0.45);
+    border: 1px solid rgba(0, 229, 138, 0.45);
     border-left-width: 3px;
     border-radius: 4px;
-    background: rgba(212, 175, 55, 0.10);
+    background: rgba(0, 229, 138, 0.10);
     font-size: 11px;
     line-height: 1.5;
     color: var(--text-primary, #eee);

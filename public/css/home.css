@@ -1,10 +1,13 @@
 /* The coming-soon landing at dungeonknights.io.
  *
- * Laid out like the reference (one centred column: crest, wordmark, line, two actions, footer) and
- * wearing the game's own theme — Cinzel Decorative, the gold accent, the same button language as the
- * Kingdom Gate — because this page and the game are one product.
+ * The look is a terminal: one phosphor green, JetBrains Mono throughout, square corners, a `>`
+ * prompt and a block caret. The page reads as a readout rather than a poster, which is the register
+ * the product is actually in — an idle RPG whose rewards are signed on chain, arriving on a chain.
+ * The game's medieval art is still here, but as texture behind glass rather than as the subject:
+ * the loop and the crest stay, and everything else that used to carry the fantasy (Cinzel
+ * Decorative, the gold, the bevels) is gone.
  *
- * Three deliberate constraints:
+ * Three deliberate constraints, all of which outrank the aesthetic:
  *   - it never depends on a route inside the app (the app host is password-gated, so a public page
  *     linking into it would be a dead end for a stranger),
  *   - the video is decoration, never the layout. Everything above it is text, so the page reads
@@ -16,6 +19,11 @@
  * before they have any reason to trust the project: the two costs that were worth real bytes were a
  * 37 MB 1080p loop (now `/assets/intro-web.mp4`, 3.2 MB) and a 965 KB JPEG painting a phone screen
  * that is 390 points wide (now an 85 KB WebP — see the desktop/mobile pair in the background rule).
+ *
+ * `tools/check-landing.js` asserts on the exact text of several rules below — the order of the two
+ * `padding` declarations, the shape of the un-pinning query, the phone block, the 380px button. They
+ * are written as they are for the reasons in the comments, and the checker is the reason they cannot
+ * be casually reordered while the look is adjusted.
  */
 
 .home-page {
@@ -39,9 +47,16 @@
     padding: 32px 24px calc(54px + var(--home-foot-gap)) 24px;
 
     overflow: hidden;
-    background: #12100E url('/assets/images/menu-background.webp') center / cover no-repeat;
 
-    /* A tap on a gold button used to flash the system's grey highlight over the art, and iOS likes
+    /* The accent is declared once and read by the focus ring below, so the one rule that has to be
+       visible to a keyboard is defined by the same token as everything else. The dim variant is the
+       prompt glyph, which must not be the same value as the text it sits against. */
+    --accent: #00E58A;
+    --accent-dim: #0B7A4B;
+
+    background: #06080A url('/assets/images/menu-background.webp') center / cover no-repeat;
+
+    /* A tap on a button used to flash the system's grey highlight over the art, and iOS likes
        to inflate text in landscape unless it is told not to. Both are one line, both are invisible
        on a desktop. */
     -webkit-tap-highlight-color: transparent;
@@ -59,16 +74,19 @@
     pointer-events: none;
 }
 
-/* Two gradients rather than one flat wash: the top one keeps the wordmark legible over a bright
- * frame, the bottom one keeps the footer legible over a dark one. */
+/* Heavier than a landing page normally wants, because a terminal is opaque by nature: the painting
+ * is a texture behind glass, not a scene. Three layers, in order — the wash that dims the art, one
+ * soft pool of phosphor behind the column, and the scanline. The scanline period is 3px, which is
+ * the smallest that does not moiré against a 1440px screen at 1x. */
 .home-scrim {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
     background:
-        linear-gradient(180deg, rgba(8, 7, 6, 0.72) 0%, rgba(8, 7, 6, 0.42) 34%, rgba(8, 7, 6, 0.62) 74%, rgba(8, 7, 6, 0.88) 100%),
-        radial-gradient(ellipse at 50% 42%, rgba(8, 7, 6, 0.15) 0%, rgba(8, 7, 6, 0.6) 100%);
+        linear-gradient(180deg, rgba(6, 8, 10, 0.92) 0%, rgba(6, 8, 10, 0.82) 40%, rgba(6, 8, 10, 0.9) 100%),
+        radial-gradient(ellipse 70% 50% at 50% 45%, rgba(0, 229, 138, 0.07) 0%, rgba(0, 229, 138, 0) 100%),
+        repeating-linear-gradient(180deg, rgba(0, 229, 138, 0.035) 0px, rgba(0, 229, 138, 0.035) 1px, transparent 1px, transparent 3px);
 }
 
 .home-center {
@@ -83,38 +101,68 @@
 .home-crest {
     width: 46px;
     height: 46px;
+    /* Pixel art and a terminal are the same idea — a fixed grid, no antialiasing — so the crest is
+       left crisp rather than smoothed, and dimmed until it sits inside the readout. */
     image-rendering: pixelated;
     margin-bottom: 14px;
-    filter: brightness(1.25) drop-shadow(0 0 18px rgba(212, 175, 55, 0.35));
+    filter: grayscale(0.5) brightness(1.05) drop-shadow(0 0 14px rgba(0, 229, 138, 0.3));
 }
 
 .home-title {
     margin: 0;
-    font-family: var(--font-display, 'Cinzel Decorative', serif);
+    font-family: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
     font-size: clamp(2.1rem, 6vw, 3.6rem);
     font-weight: 700;
+    line-height: 1.1;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--accent-gold, #D4AF37);
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.85), 0 0 44px rgba(212, 175, 55, 0.28);
+    color: #D6FFE9;
+    text-shadow: 0 0 30px rgba(0, 229, 138, 0.35);
 }
 
+/* The prompt, and the caret that follows it. Both are `::before` / `::after` rather than characters
+ * in the copy, so the text stays selectable and translatable without dragging a decoration through
+ * it. Flex is what puts the glyph, the label and the caret on one baseline-centred row. */
 .home-sub {
     margin: 12px 0 0;
-    font-family: var(--font-heading, 'Cinzel', serif);
+    font-family: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
     font-size: clamp(0.78rem, 2.1vw, 0.95rem);
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-primary, #E8E0D4);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.home-sub::before {
+    content: '>';
+    color: var(--accent-dim);
+}
+
+.home-sub::after {
+    content: '';
+    width: 8px;
+    height: 1em;
+    background: var(--accent);
+    animation: home-caret 1.1s steps(1) infinite;
+}
+
+@keyframes home-caret {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
 }
 
 .home-line {
     margin: 22px auto 0;
-    max-width: 560px;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 14px;
-    line-height: 1.75;
-    color: #c9c1b4;
+    max-width: 620px;
+    font-family: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+    font-size: 13px;
+    line-height: 1.85;
+    /* A readout wants a fixed measure, and a paragraph of 13px mono wants a narrower one than the
+       proportional face this slot used to hold. */
+    color: #8FA79B;
 }
 
 /* ---------------------------------------------------------------- the two doorways */
@@ -133,11 +181,12 @@
     gap: 10px;
     min-width: 240px;
     padding: 14px 22px;
-    border-radius: 4px;
-    font-family: var(--font-heading, 'Cinzel', serif);
+    /* Square, because a rounded rectangle is a consumer app and this is a readout. */
+    border-radius: 0;
+    font-family: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
@@ -153,50 +202,41 @@
  * lifted by a pixel until something else is tapped. A desktop gets the lift; a phone does not. */
 @media (hover: hover) and (pointer: fine) {
     .home-btn:hover { transform: translateY(-1px); }
-    .home-btn-secondary:hover { border-color: rgba(232, 224, 212, 0.6); }
-    .home-footer a:hover { color: var(--accent-gold, #D4AF37); }
+    .home-btn-secondary:hover {
+        border-color: var(--accent);
+        background: rgba(0, 229, 138, 0.08);
+    }
+    .home-btn-primary:hover { box-shadow: 0 0 34px rgba(0, 229, 138, 0.4); }
+    .home-footer a:hover { color: var(--accent); }
 }
 
 .home-btn:active { transform: translateY(0); }
 
 /* Keyboard visitors land on a dark page: the browser's default ring is a hairline that disappears
- * against the gold border. Named here rather than left to the theme, which styles none of this
+ * against a dark border. Named here rather than left to the theme, which styles none of this
  * page's controls. */
 .home-btn:focus-visible,
 .home-footer a:focus-visible {
-    outline: 2px solid var(--accent-gold-light, #F4D03F);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
 }
 
+/* The one filled control on the page, and it is a solid block of phosphor rather than a gradient —
+ * a gradient would read as a consumer button. */
 .home-btn-primary {
-    border: 1px solid var(--accent-gold, #D4AF37);
-    background: linear-gradient(180deg, #4a3d18, #2a2210);
-    color: var(--accent-gold-light, #F4D03F);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 10px 28px rgba(212, 175, 55, 0.16);
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #04120A;
+    box-shadow: 0 0 24px rgba(0, 229, 138, 0.22);
 }
 
 .home-btn-secondary {
-    border: 1px solid rgba(232, 224, 212, 0.35);
-    background: rgba(12, 11, 10, 0.72);
-    color: var(--text-primary, #E8E0D4);
+    border: 1px solid rgba(0, 229, 138, 0.35);
+    background: transparent;
+    color: var(--accent);
 }
 
-.home-btn .home-btn-note {
-    display: block;
-    margin-top: 2px;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    text-transform: none;
-    color: #9d968a;
-}
-
-/* ---------------------------------------------------------------------- the queue
- * One line, and the only thing on this page that comes from the server. The form it used to sit
- * under — and the follow checkbox, and the message box — moved to /genesis with the rest of the
- * collection: the page that argues for owning one is the page that should ask for an address. */
-/* ------------------------------------------------------------------------- footer */
+/* ----------------------------------------------------------------------------- footer */
 .home-footer {
     position: absolute;
     left: 0;
@@ -209,35 +249,40 @@
     justify-content: center;
     gap: 14px;
     padding: 18px max(24px, env(safe-area-inset-right, 0px)) var(--home-foot-gap) max(24px, env(safe-area-inset-left, 0px));
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
     font-size: 11px;
     letter-spacing: 0.6px;
-    color: #8a8377;
+    color: #4E6B5C;
 }
 
 .home-footer a {
-    color: #b3aa9c;
+    color: #6E8F7E;
     text-decoration: none;
 }
 
-/* A phone should not spend its data on a background loop, and neither should anyone who has asked
- * their system for less movement. Both get the poster image, which is already the page's background.
- * `display: none` is what actually saves the bytes: a media element that is not rendered never runs
- * source selection, so the 3.2 MB file is not requested at all — verified by watching the resource
- * timings on a 390-wide viewport, not by reading this rule.
+/* A phone gets the same loop as a desktop.
  *
- * The art behind it is trimmed for the same reason: 85 KB at 900px wide instead of 292 KB at 1920,
- * for a screen 390 points across that shows it under two gradients anyway. Only the image layer is
- * replaced, so the colour, the `cover` sizing and the position all carry over from the shorthand
- * above. The 965 KB JPEG both of these replaced is still on disk — `/hub`, the three game screens
- * and the social card all still ask for it by name. */
+ * This used to be `.home-video { display: none }` on a phone, which saved the whole file: an element
+ * that is not rendered never runs source selection, so the bytes were never spent. There was then a
+ * four-rung source ladder — a 1080p cut and two fallbacks for wide viewports, a 495 KB cut for
+ * phones — expressed in `media` attributes on each `<source>` rather than here, so that which file a
+ * browser asked for was decided in one place. It is one ungated source now, `/assets/intro-web.mp4`,
+ * and this rule has nothing left to decide about it. See the comment on the `<video>` in
+ * `lib/static-pages.js`, which is where that choice is written down.
+ *
+ * The background image stays as the poster and the paint behind the element, so a visitor whose
+ * browser plays no video at all still gets the picture rather than a flat colour. */
 @media (max-width: 760px) {
-    .home-video { display: none; }
     .home-page { background-image: url('/assets/images/menu-background-mobile.webp'); }
 }
 
+/* Motion is still a request, and a looping background video is exactly what that setting is for.
+ * This is a different reason from the phone rule above and it outranks it: a visitor who has asked
+ * for less movement gets none, on any screen. The caret is left in place as a static block rather
+ * than removed so the line does not reflow. */
 @media (prefers-reduced-motion: reduce) {
     .home-video { display: none; }
+    .home-sub::after { animation: none; }
 }
 
 /* ------------------------------------------------------------------ the un-pinning
@@ -289,7 +334,7 @@
 }
 
 /* Measured on the smallest phones still in use, where a 320pt screen leaves 284px for the button:
- * "Join the Points Program" in Cinzel at 13px with 2px of tracking needs more than that, so the
+ * "Join the Points Program" in mono at 13px with 1px of tracking needs more than that, so the
  * label broke over two lines and the button grew from 47px to 64px. Tightening the tracking and the
  * copy size is what keeps it on one line — the target stays comfortably past 44px either way. */
 @media (max-width: 380px) {

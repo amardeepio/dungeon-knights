@@ -118,7 +118,7 @@
     height: 50px;
     margin: 20px auto;
     border: 5px solid rgba(120, 113, 108, 0.3);
-    border-top: 5px solid #fbbf24;
+    border-top: 5px solid #7cffb2;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -163,17 +163,17 @@
 }
 
 .leaderboard-table tbody tr:hover {
-    background: rgba(251, 191, 36, 0.1);
+    background: rgba(124, 255, 178, 0.1);
     transform: translateX(4px);
 }
 
 .leaderboard-table tbody tr.current-user {
-    background: rgba(251, 191, 36, 0.2);
-    border: 2px solid #fbbf24;
+    background: rgba(124, 255, 178, 0.2);
+    border: 2px solid #7cffb2;
 }
 
 .leaderboard-table tbody tr.current-user:hover {
-    background: rgba(251, 191, 36, 0.3);
+    background: rgba(124, 255, 178, 0.3);
 }
 
 .leaderboard-table td {
@@ -201,10 +201,10 @@
 }
 
 .rank-badge.gold {
-    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    background: linear-gradient(135deg, #7cffb2, #f59e0b);
     color: #1a1410;
     font-size: 20px;
-    box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+    box-shadow: 0 0 20px rgba(124, 255, 178, 0.6);
 }
 
 .rank-badge.silver {
@@ -239,7 +239,7 @@
 
 .current-user-badge {
     display: inline-block;
-    background: #fbbf24;
+    background: #7cffb2;
     color: #1a1410;
     padding: 2px 8px;
     border-radius: 4px;
@@ -254,8 +254,8 @@
     text-align: right;
     font-weight: bold;
     font-size: 16px;
-    color: #fbbf24;
-    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+    color: #7cffb2;
+    text-shadow: 0 0 10px rgba(124, 255, 178, 0.3);
 }
 
 /* Empty State */

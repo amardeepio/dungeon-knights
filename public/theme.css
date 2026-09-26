@@ -24,19 +24,19 @@
   /* Borders */
   --border-dim:   #2E2820;
   --border-base:  #4A3F30;
-  --border-bronze:#8B6B3D;
-  --border-gold:  #C9A84C;
+  --border-bronze:#0b7a4b;
+  --border-gold:  #00e58a;
 
   /* Accent */
-  --accent-gold:  #D4AF37;
-  --accent-gold-light: #F4D03F;
-  --accent-gold-dim:   #8B7A2A;
+  --accent-gold:  #00e58a;
+  --accent-gold-light: #7cffb2;
+  --accent-gold-dim:   #0b7a4b;
 
   /* Text */
   --text-primary:   #E8E0D4;
   --text-secondary: #A89A86;
   --text-muted:     #6B5F50;
-  --text-gold:      #D4AF37;
+  --text-gold:      #00e58a;
 
   /* Dungeon accent tints */
   --tint-crypts: #7EB8DA;
@@ -638,7 +638,7 @@ body {
   font-family: var(--font-heading);
 }
 .badge-mythic { background: rgba(176,124,216,0.15); color: #B07CD8; border: 1px solid rgba(176,124,216,0.3); }
-.badge-legendary { background: rgba(212,175,55,0.15); color: var(--accent-gold); border: 1px solid rgba(212,175,55,0.3); }
+.badge-legendary { background: rgba(0, 229, 138,0.15); color: var(--accent-gold); border: 1px solid rgba(0, 229, 138,0.3); }
 .badge-epic { background: rgba(232,93,58,0.15); color: #E85D3A; border: 1px solid rgba(232,93,58,0.3); }
 .badge-rare { background: rgba(74,222,128,0.15); color: #4ADE80; border: 1px solid rgba(74,222,128,0.3); }
 .badge-common { background: rgba(168,154,134,0.15); color: var(--text-secondary); border: 1px solid rgba(168,154,134,0.2); }
@@ -719,7 +719,7 @@ body {
   font-size: clamp(18px, 2.4vw, 26px);
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent-gold, #d4a843);
+  color: var(--accent-gold, #00e58a);
   text-shadow: 0 0 24px rgba(212, 168, 67, 0.25);
 }
 
@@ -743,7 +743,7 @@ body {
   height: 100%;
   width: 3%;
   border-radius: 2px;
-  background: linear-gradient(90deg, #7a5c2e 0%, var(--accent-gold, #d4a843) 100%);
+  background: linear-gradient(90deg, #7a5c2e 0%, var(--accent-gold, #00e58a) 100%);
   transition: width 260ms ease-out;
 }
 

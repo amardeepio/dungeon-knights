@@ -99,7 +99,7 @@ body::before {
 .stat-value {
     font-size: 18px;
     font-weight: bold;
-    color: #fcd34d;
+    color: #7cffb2;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
@@ -443,17 +443,17 @@ body::before {
 }
 
 .btn-primary {
-    border-top-color: rgba(251, 191, 36, 0.5);
+    border-top-color: rgba(124, 255, 178, 0.5);
     border-right-color: rgba(245, 158, 11, 0.6);
     border-bottom-color: rgba(217, 119, 6, 0.7);
     border-left-color: rgba(245, 158, 11, 0.6);
 }
 
 .btn-primary:hover {
-    border-top-color: rgba(251, 191, 36, 0.8);
+    border-top-color: rgba(124, 255, 178, 0.8);
     box-shadow: 
         0 6px 16px rgba(0, 0, 0, 0.9),
-        0 0 20px rgba(251, 191, 36, 0.2);
+        0 0 20px rgba(124, 255, 178, 0.2);
     transform: translateY(-2px);
 }
 
@@ -488,7 +488,7 @@ body::before {
 }
 
 .quick-stats strong {
-    color: #fcd34d;
+    color: #7cffb2;
     margin-left: 0.3rem;
 }
 
@@ -629,7 +629,7 @@ body::before {
 }
 
 .completion-stats span {
-    color: #fcd34d;
+    color: #7cffb2;
     font-weight: bold;
 }
 
@@ -899,7 +899,7 @@ body::before {
     padding: 0.5rem;
     text-align: center;
     font-weight: bold;
-    color: #fcd34d;
+    color: #7cffb2;
     font-family: 'Courier New', monospace;
 }
 

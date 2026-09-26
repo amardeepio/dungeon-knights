@@ -110,7 +110,7 @@ body::before {
     border-radius: 4px;
     font-size: 1.3rem;
     font-weight: bold;
-    color: #fcd34d;
+    color: #7cffb2;
     box-shadow: 
         0 8px 24px rgba(0, 0, 0, 0.8),
         inset 0 2px 0 rgba(252, 211, 77, 0.1),
@@ -416,7 +416,7 @@ body::before {
 }
 
 .cost-value {
-    color: #fcd34d;
+    color: #7cffb2;
     font-weight: bold;
     margin-left: 0.5rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
@@ -696,7 +696,7 @@ body::before {
 }
 
 #costCurrency.dng-cost {
-    color: #fbbf24;
+    color: #7cffb2;
 }
 
 /* Loading State */

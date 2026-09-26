@@ -89,7 +89,7 @@ body::before {
         0 8px 24px rgba(0, 0, 0, 0.8),
         inset 0 2px 0 rgba(252, 211, 77, 0.1),
         inset 0 -2px 0 rgba(0, 0, 0, 0.6);
-    color: #fcd34d;
+    color: #7cffb2;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
@@ -525,9 +525,9 @@ body::before {
     top: -2px;
     bottom: -2px;
     width: 2px;
-    background: linear-gradient(180deg, #fbbf24, #f59e0b);
+    background: linear-gradient(180deg, #7cffb2, #f59e0b);
     box-shadow: 
-        0 0 6px rgba(251, 191, 36, 0.6),
+        0 0 6px rgba(124, 255, 178, 0.6),
         0 0 2px rgba(0, 0, 0, 0.8);
     z-index: 2;
     pointer-events: none;

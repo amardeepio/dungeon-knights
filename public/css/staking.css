@@ -66,7 +66,7 @@
     padding: 3px 8px;
     border: 1px solid var(--border-gold);
     border-radius: var(--radius-sm);
-    background: rgba(212, 175, 55, 0.08);
+    background: rgba(0, 229, 138, 0.08);
     color: var(--accent-gold);
     font-family: var(--font-heading);
     font-size: 9px;
@@ -360,7 +360,7 @@
     border: 1px solid var(--border-base);
     border-radius: var(--radius-sm);
     background:
-        radial-gradient(circle at 50% 34%, rgba(212, 175, 55, 0.14), transparent 62%),
+        radial-gradient(circle at 50% 34%, rgba(0, 229, 138, 0.14), transparent 62%),
         var(--bg-dark);
     display: flex;
     align-items: center;
@@ -389,7 +389,7 @@
 }
 
 .sv-art[data-rarity='rare'] .sv-art-glyph { color: #7EB8DA; }
-.sv-art[data-rarity='legendary'] .sv-art-glyph { color: #D4AF37; }
+.sv-art[data-rarity='legendary'] .sv-art-glyph { color: #00e58a; }
 .sv-art[data-rarity='prime'] .sv-art-glyph { color: #B07CD8; }
 
 /* Staked cards get a slow pulse instead of a spinner: it reads as "working", and it
@@ -399,7 +399,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.25);
+    box-shadow: inset 0 0 10px rgba(0, 229, 138, 0.25);
     animation: sv-breathe 3.6s ease-in-out infinite;
 }
 
@@ -576,7 +576,7 @@
     font-size: 13px;
 }
 
-.sv-board-row.is-me { background: rgba(212, 175, 55, 0.07); }
+.sv-board-row.is-me { background: rgba(0, 229, 138, 0.07); }
 .sv-board-row.is-me .sv-board-rank { color: var(--accent-gold); }
 
 /* ------------------------------------------------------------------- capsule grid */
@@ -899,7 +899,7 @@
 .sv-band:hover,
 .sv-band.is-active {
     border-color: var(--border-bronze);
-    background: rgba(212, 175, 55, 0.07);
+    background: rgba(0, 229, 138, 0.07);
 }
 
 .sv-band:focus-visible {
@@ -942,7 +942,7 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(180deg, var(--accent-gold-light), var(--accent-gold));
-    box-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 6px rgba(0, 229, 138, 0.5);
 }
 
 .sv-band.has-mine .sv-band-name { color: var(--accent-gold); }
@@ -1061,7 +1061,7 @@
 
 .sv-tile.is-final .sv-ring-fill {
     stroke: var(--accent-gold-light);
-    filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
+    filter: drop-shadow(0 0 4px rgba(0, 229, 138, 0.6));
 }
 
 /* --------------------------------------------------------------- the economy panel
@@ -1073,7 +1073,7 @@
 .sv-econ {
     border: 1px solid var(--border-bronze);
     border-radius: var(--radius-md);
-    background: linear-gradient(180deg, rgba(212, 175, 55, 0.05), transparent 60%), var(--bg-raised);
+    background: linear-gradient(180deg, rgba(0, 229, 138, 0.05), transparent 60%), var(--bg-raised);
     padding: 10px 12px 11px;
     display: flex;
     flex-direction: column;
@@ -1238,7 +1238,7 @@
 
 .sv-collection.is-on {
     border-color: var(--border-gold);
-    background: linear-gradient(180deg, rgba(212, 175, 55, 0.10), transparent 70%), var(--bg-dark);
+    background: linear-gradient(180deg, rgba(0, 229, 138, 0.10), transparent 70%), var(--bg-dark);
 }
 
 .sv-collection:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 2px; }
@@ -1279,8 +1279,8 @@
     text-align: left;
 }
 
-.sv-tier-row:hover { background: rgba(212, 175, 55, 0.05); }
-.sv-tier-row.is-active { border-color: var(--border-bronze); background: rgba(212, 175, 55, 0.08); }
+.sv-tier-row:hover { background: rgba(0, 229, 138, 0.05); }
+.sv-tier-row.is-active { border-color: var(--border-bronze); background: rgba(0, 229, 138, 0.08); }
 .sv-tier-row:focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 1px; }
 
 .sv-tier-name {

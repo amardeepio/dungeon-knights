@@ -100,7 +100,7 @@
     border: 1px solid var(--border-gold);
     border-radius: var(--radius-md);
     background: var(--bg-dark);
-    box-shadow: 0 0 22px rgba(212, 175, 55, 0.12);
+    box-shadow: 0 0 22px rgba(0, 229, 138, 0.12);
 }
 
 .gn-crest-facts { min-width: 0; }
@@ -531,7 +531,7 @@
 .gn-form input[type='email']:focus,
 .gn-form input[type='text']:focus {
     border-color: var(--accent-gold);
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.16);
+    box-shadow: 0 0 0 2px rgba(0, 229, 138, 0.16);
 }
 
 .gn-form input:disabled { opacity: 0.6; }
@@ -569,8 +569,8 @@
 }
 
 .gn-message[data-kind='ok'] {
-    border: 1px solid rgba(212, 175, 55, 0.45);
-    background: rgba(212, 175, 55, 0.09);
+    border: 1px solid rgba(0, 229, 138, 0.45);
+    background: rgba(0, 229, 138, 0.09);
     color: var(--text-primary);
 }
 

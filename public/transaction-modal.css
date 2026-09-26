@@ -71,9 +71,9 @@
 .transaction-amount {
     font-size: 36px;
     font-weight: bold;
-    color: #fbbf24;
+    color: #7cffb2;
     margin: 20px 0;
-    text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+    text-shadow: 0 0 20px rgba(124, 255, 178, 0.5);
 }
 
 /* Loading Spinner */
@@ -82,7 +82,7 @@
     height: 60px;
     margin: 20px auto;
     border: 6px solid rgba(120, 113, 108, 0.3);
-    border-top: 6px solid #fbbf24;
+    border-top: 6px solid #7cffb2;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -161,10 +161,10 @@
     position: absolute;
     width: 8px;
     height: 8px;
-    background: #fbbf24;
+    background: #7cffb2;
     border-radius: 50%;
     animation: particleFloat 1.5s ease-out forwards;
-    box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+    box-shadow: 0 0 10px rgba(124, 255, 178, 0.8);
 }
 
 @keyframes particleFloat {
@@ -253,7 +253,7 @@
 }
 
 .transaction-hash a {
-    color: #fbbf24;
+    color: #7cffb2;
     text-decoration: none;
     transition: color 0.3s ease;
 }

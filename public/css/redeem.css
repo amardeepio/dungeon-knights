@@ -25,7 +25,7 @@
     display: flex;
     flex-direction: column;
     background:
-        radial-gradient(1200px 700px at 50% -10%, rgba(212, 175, 55, 0.06), rgba(13, 10, 8, 0) 70%),
+        radial-gradient(1200px 700px at 50% -10%, rgba(0, 229, 138, 0.06), rgba(13, 10, 8, 0) 70%),
         var(--bg-void, #0d0a08);
     color: var(--text-primary, #e8e2d7);
 }
@@ -53,7 +53,7 @@
     font-size: clamp(1.15rem, 2.4vw, 1.6rem);
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--accent-gold, #d4af37);
+    color: var(--accent-gold, #00e58a);
 }
 
 .redeem-sub {
@@ -80,7 +80,7 @@
     font-family: var(--font-heading, 'Cinzel', serif);
     font-size: 13px;
     font-weight: 700;
-    color: var(--accent-gold, #d4af37);
+    color: var(--accent-gold, #00e58a);
 }
 
 .redeem-who {
@@ -143,7 +143,7 @@
     border: 1px solid var(--border-base, #33291d);
     border-radius: var(--radius-lg, 12px);
     background:
-        radial-gradient(900px 360px at 50% -14%, rgba(212, 175, 55, 0.10), rgba(15, 13, 11, 0) 72%),
+        radial-gradient(900px 360px at 50% -14%, rgba(0, 229, 138, 0.10), rgba(15, 13, 11, 0) 72%),
         linear-gradient(180deg, rgba(33, 30, 26, 0.95) 0%, rgba(13, 11, 9, 0.97) 100%);
     box-shadow: var(--shadow-inset, inset 0 1px 0 rgba(255, 255, 255, 0.04)), 0 12px 32px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -157,14 +157,14 @@
     padding: 5px 15px;
     border: 1px solid var(--border-bronze, #5a4a2c);
     border-radius: 999px;
-    background: linear-gradient(180deg, rgba(212, 175, 55, 0.11), rgba(212, 175, 55, 0.02));
+    background: linear-gradient(180deg, rgba(0, 229, 138, 0.11), rgba(0, 229, 138, 0.02));
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     font-family: var(--font-heading, 'Cinzel', serif);
     font-size: 11px;
     letter-spacing: 1.3px;
     text-transform: uppercase;
     text-align: center;
-    color: var(--accent-gold, #d4af37);
+    color: var(--accent-gold, #00e58a);
 }
 
 /* ------------------------------------------------------------------- the cabinet */
@@ -185,7 +185,7 @@
     background: linear-gradient(180deg, #241d15 0%, #120f0c 46%, #0b0908 100%);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.07),
-        inset 0 0 0 1px rgba(212, 175, 55, 0.16),
+        inset 0 0 0 1px rgba(0, 229, 138, 0.16),
         inset 0 24px 34px -28px rgba(0, 0, 0, 0.95),
         0 16px 34px rgba(0, 0, 0, 0.5);
 }
@@ -200,7 +200,7 @@
     height: 9px;
     border-radius: 2px;
     background: radial-gradient(circle at 34% 30%, #f0d894, #8a6c22 62%, #3b2f13);
-    box-shadow: 0 0 6px rgba(212, 175, 55, 0.35);
+    box-shadow: 0 0 6px rgba(0, 229, 138, 0.35);
 }
 
 .redeem-machine::before { left: 9px; }
@@ -218,7 +218,7 @@
     height: 2px;
     transform: translateY(-1px);
     border-radius: 2px;
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0) 0%, rgba(212, 175, 55, 0.30) 14%, rgba(212, 175, 55, 0.30) 86%, rgba(212, 175, 55, 0) 100%);
+    background: linear-gradient(90deg, rgba(0, 229, 138, 0) 0%, rgba(0, 229, 138, 0.30) 14%, rgba(0, 229, 138, 0.30) 86%, rgba(0, 229, 138, 0) 100%);
     pointer-events: none;
 }
 
@@ -230,27 +230,27 @@
     transform: translateY(-50%);
     font-size: 9px;
     line-height: 1;
-    color: rgba(212, 175, 55, 0.55);
+    color: rgba(0, 229, 138, 0.55);
 }
 
 .redeem-payline::before { content: '▶'; left: -11px; }
 .redeem-payline::after { content: '◀'; right: -11px; }
 
 .redeem-machine.is-win .redeem-payline::before,
-.redeem-machine.is-win .redeem-payline::after { color: var(--accent-gold, #d4af37); }
+.redeem-machine.is-win .redeem-payline::after { color: var(--accent-gold, #00e58a); }
 
 .redeem-machine.is-lose .redeem-payline { opacity: 0.4; }
 
 /* The loudest thing on the page, and it only lights when somebody has won something. */
 .redeem-machine.is-win .redeem-payline {
     opacity: 1;
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0) 0%, var(--accent-gold, #d4af37) 20%, #fff3c4 50%, var(--accent-gold, #d4af37) 80%, rgba(212, 175, 55, 0) 100%);
+    background: linear-gradient(90deg, rgba(0, 229, 138, 0) 0%, var(--accent-gold, #00e58a) 20%, #fff3c4 50%, var(--accent-gold, #00e58a) 80%, rgba(0, 229, 138, 0) 100%);
     animation: redeem-payline 1.6s ease-in-out infinite;
 }
 
 @keyframes redeem-payline {
-    0%, 100% { box-shadow: 0 0 12px rgba(212, 175, 55, 0.55), 0 0 28px rgba(212, 175, 55, 0.25); }
-    50% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.95), 0 0 46px rgba(212, 175, 55, 0.45); }
+    0%, 100% { box-shadow: 0 0 12px rgba(0, 229, 138, 0.55), 0 0 28px rgba(0, 229, 138, 0.25); }
+    50% { box-shadow: 0 0 20px rgba(0, 229, 138, 0.95), 0 0 46px rgba(0, 229, 138, 0.45); }
 }
 
 /* -------------------------------------------------------------------- the reels */
@@ -332,7 +332,7 @@
     object-fit: cover;
     border-radius: 8px;
     image-rendering: pixelated;
-    border: 1px solid rgba(212, 175, 55, 0.20);
+    border: 1px solid rgba(0, 229, 138, 0.20);
     background: #0b0908;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.6);
 }
@@ -354,11 +354,11 @@
    for the strip to carry. The card is named in the sentence under the reels instead. */
 .redeem-machine.is-win .redeem-tile img {
     animation: redeem-mark 1.6s ease-in-out infinite;
-    border-color: rgba(212, 175, 55, 0.75);
+    border-color: rgba(0, 229, 138, 0.75);
 }
 
 .redeem-machine.is-win .redeem-tile-label {
-    color: var(--accent-gold, #d4af37);
+    color: var(--accent-gold, #00e58a);
     font-weight: 700;
 }
 
@@ -381,9 +381,9 @@
 /* The settle: the roll stops, the transform that was always on the strip takes over, and the tile
    that was drawn lands with one small breath rather than a snap. */
 .redeem-reel.is-set {
-    border-color: rgba(212, 175, 55, 0.55);
+    border-color: rgba(0, 229, 138, 0.55);
     box-shadow:
-        0 0 0 1px rgba(212, 175, 55, 0.18),
+        0 0 0 1px rgba(0, 229, 138, 0.18),
         0 4px 16px rgba(0, 0, 0, 0.55);
 }
 
@@ -399,16 +399,16 @@
 
 /* Three of a kind: the whole cabinet answers, not just the payline. */
 .redeem-machine.is-win .redeem-reel {
-    border-color: var(--accent-gold, #d4af37);
+    border-color: var(--accent-gold, #00e58a);
     box-shadow:
-        0 0 0 1px rgba(212, 175, 55, 0.5),
-        0 0 26px rgba(212, 175, 55, 0.35),
-        inset 0 0 22px rgba(212, 175, 55, 0.12);
+        0 0 0 1px rgba(0, 229, 138, 0.5),
+        0 0 26px rgba(0, 229, 138, 0.35),
+        inset 0 0 22px rgba(0, 229, 138, 0.12);
 }
 
 @keyframes redeem-mark {
-    0%, 100% { transform: scale(1); box-shadow: 0 5px 12px rgba(0, 0, 0, 0.6), 0 0 14px rgba(212, 175, 55, 0.35); }
-    50% { transform: scale(1.07); box-shadow: 0 5px 12px rgba(0, 0, 0, 0.6), 0 0 28px rgba(212, 175, 55, 0.9); }
+    0%, 100% { transform: scale(1); box-shadow: 0 5px 12px rgba(0, 0, 0, 0.6), 0 0 14px rgba(0, 229, 138, 0.35); }
+    50% { transform: scale(1.07); box-shadow: 0 5px 12px rgba(0, 0, 0, 0.6), 0 0 28px rgba(0, 229, 138, 0.9); }
 }
 
 /* ---------------------------------------------------------------- the result */
@@ -422,7 +422,7 @@
     color: var(--text-secondary, #c9c1b4);
 }
 
-.redeem-result strong { color: var(--accent-gold, #d4af37); }
+.redeem-result strong { color: var(--accent-gold, #00e58a); }
 
 .redeem-result.is-amazon,
 .redeem-result.is-google {
@@ -434,7 +434,7 @@
 .redeem-result.is-amazon strong,
 .redeem-result.is-google strong {
     color: #ffe9a3;
-    text-shadow: 0 0 14px rgba(212, 175, 55, 0.45);
+    text-shadow: 0 0 14px rgba(0, 229, 138, 0.45);
 }
 
 .redeem-result.is-tryAgain { color: var(--text-muted, #8a8177); }
@@ -445,10 +445,10 @@
     gap: 12px;
     margin: 0;
     padding: 12px 20px;
-    border: 1px solid var(--accent-gold, #d4af37);
+    border: 1px solid var(--accent-gold, #00e58a);
     border-radius: 10px;
-    background: linear-gradient(180deg, rgba(212, 175, 55, 0.16), rgba(212, 175, 55, 0.04));
-    box-shadow: 0 0 26px rgba(212, 175, 55, 0.18);
+    background: linear-gradient(180deg, rgba(0, 229, 138, 0.16), rgba(0, 229, 138, 0.04));
+    box-shadow: 0 0 26px rgba(0, 229, 138, 0.18);
 }
 
 .redeem-won-label {
@@ -463,7 +463,7 @@
     font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
     font-size: 16px;
     letter-spacing: 1.6px;
-    color: var(--accent-gold, #d4af37);
+    color: var(--accent-gold, #00e58a);
     user-select: all;
     word-break: break-all;
 }
@@ -483,13 +483,13 @@
     font-family: var(--font-heading, 'Cinzel', serif);
     font-size: 13.5px;
     font-weight: 700;
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    box-shadow: 0 6px 20px rgba(0, 229, 138, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.12);
     transition: transform 0.16s ease, box-shadow 0.16s ease;
 }
 
 .redeem-spin:not(:disabled):hover {
     transform: translateY(-1px);
-    box-shadow: 0 9px 26px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    box-shadow: 0 9px 26px rgba(0, 229, 138, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .redeem-spin:disabled {
@@ -544,7 +544,7 @@
     font-weight: 700;
     letter-spacing: 1.6px;
     text-transform: uppercase;
-    color: var(--accent-gold, #d4af37);
+    color: var(--accent-gold, #00e58a);
 }
 
 .redeem-panel-count {
@@ -587,7 +587,7 @@
 
 .redeem-code-row.is-amazon,
 .redeem-code-row.is-google {
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0.07), var(--bg-dark, #0f0d0b) 60%);
+    background: linear-gradient(90deg, rgba(0, 229, 138, 0.07), var(--bg-dark, #0f0d0b) 60%);
 }
 
 .redeem-code-when {
@@ -643,7 +643,7 @@
     font-size: 10.5px;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    color: var(--accent-gold, #d4af37);
+    color: var(--accent-gold, #00e58a);
     padding-top: 2px;
 }
 

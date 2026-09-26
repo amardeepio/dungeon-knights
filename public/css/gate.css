@@ -25,7 +25,7 @@ body {
     justify-content: center;
     padding: 24px;
     background:
-        radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.10), transparent 62%),
+        radial-gradient(circle at 50% 20%, rgba(0, 229, 138, 0.10), transparent 62%),
         #12100E;
     font-family: 'Inter', system-ui, sans-serif;
     color: #E8E0D4;
@@ -35,7 +35,7 @@ body {
     width: 100%;
     max-width: 420px;
     padding: 32px 28px 26px;
-    border: 1px solid rgba(212, 175, 55, 0.35);
+    border: 1px solid rgba(0, 229, 138, 0.35);
     border-radius: 6px;
     background: rgba(0, 0, 0, 0.45);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 18px 50px rgba(0, 0, 0, 0.55);
@@ -48,7 +48,7 @@ body {
     font-size: 22px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #D4AF37;
+    color: #00e58a;
 }
 
 .gate-sub {
@@ -57,7 +57,7 @@ body {
     font-size: 12px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #8B7A2A;
+    color: #0b7a4b;
 }
 
 .gate-note {
@@ -71,7 +71,7 @@ body {
     width: 100%;
     box-sizing: border-box;
     padding: 11px 12px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(0, 229, 138, 0.3);
     border-radius: 4px;
     background: #0b0a09;
     color: #E8E0D4;
@@ -82,18 +82,18 @@ body {
 }
 
 .gate-input:focus {
-    border-color: #D4AF37;
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.16);
+    border-color: #00e58a;
+    box-shadow: 0 0 0 2px rgba(0, 229, 138, 0.16);
 }
 
 .gate-button {
     width: 100%;
     margin-top: 12px;
     padding: 11px 16px;
-    border: 1px solid #D4AF37;
+    border: 1px solid #00e58a;
     border-radius: 4px;
     background: linear-gradient(180deg, #3a3117, #241d0d);
-    color: #F4D03F;
+    color: #7cffb2;
     font-family: 'Cinzel', serif;
     font-size: 13px;
     font-weight: 700;
@@ -120,13 +120,13 @@ body {
 .gate-footer {
     margin-top: 20px;
     padding-top: 16px;
-    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    border-top: 1px solid rgba(0, 229, 138, 0.15);
     font-size: 11.5px;
     color: #6f6960;
 }
 
 .gate-footer a {
-    color: #D4AF37;
+    color: #00e58a;
     text-decoration: none;
 }
 
