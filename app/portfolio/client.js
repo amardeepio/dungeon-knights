@@ -12,7 +12,9 @@ import {
     CAPSULE_FLING, CAPSULE_SPIN, capsuleFling, capsuleSpinFrame,
 } from '../../lib/points-config';
 import { GENESIS_PFP, RARITY, knightPfp } from '../../lib/knights';
+import { bandFor } from '../../lib/staking-config';
 import { DEFAULT_CHAIN } from '../../lib/privy-chains';
+import NftCard from '../nft-card';
 
 /**
  * My Portfolio — one wallet, read from the chain, in four sections.
@@ -342,7 +344,8 @@ export default function PortfolioClient() {
     const pageStyles = (
         <>
             <link rel="stylesheet" href="/theme.css?v=8" />
-            <link rel="stylesheet" href="/css/portfolio.css?v=4" />
+            <link rel="stylesheet" href="/css/portfolio.css?v=5" />
+            <link rel="stylesheet" href="/css/nft-ui.css?v=1" />
             {/* No ethers: every figure on this page is read by the server, so the page itself never
                 calls the chain. `wallet-source.js` is still here for the wallet's own session and
                 the menu, which is what connects and disconnects. */}
@@ -449,11 +452,13 @@ export default function PortfolioClient() {
                                         ? `${fmtDng(claimableTotal)} DNG`
                                         : '—'}
                                     hint="from both staking pools"
+                                    live
                                 />
                                 <Row
                                     label="Lifetime claimed"
                                     value={history.phase === 'ready' ? `${fmtDng(history.data?.totals?.claimed)} DNG` : history.phase === 'error' ? 'unreadable' : '—'}
                                     hint={history.phase === 'ready' ? `${fmtInt(history.data?.totals?.claims)} claim(s) · ${fmtInt(history.data?.totals?.runs)} run(s)` : null}
+                                    live
                                 />
                             </dl>
                             {history.phase === 'error' && <p className="pf-warn">{history.error}</p>}
@@ -478,25 +483,68 @@ export default function PortfolioClient() {
                                 <p className="pf-warn">{knights.error}</p>
                             ) : (
                                 <>
-                                    <div className="pf-tier-strip">
-                                        {RARITY_ORDER.map((tier) => (
-                                            <div className="pf-tier" key={tier}>
-                                                <img
-                                                    src={knightPfp(tier)}
-                                                    alt=""
-                                                    className="pf-tier-art"
-                                                    style={{ borderColor: RARITY[tier.toUpperCase()].color }}
-                                                />
-                                                <span className="pf-tier-name" style={{ color: RARITY[tier.toUpperCase()].color }}>
-                                                    {RARITY[tier.toUpperCase()].name}
-                                                </span>
-                                                <span className="pf-tier-count">{fmtInt(byTier[tier])}</span>
-                                            </div>
-                                        ))}
+                                    <div className="nft-tier-grid" role="list" aria-label="Knights by rarity tier">
+                                        {RARITY_ORDER.map((tier) => {
+                                            const meta = RARITY[tier.toUpperCase()];
+                                            return (
+                                                <div className={`nft-tier nft-rarity-${tier}`} role="listitem" key={tier}>
+                                                    <img
+                                                        src={knightPfp(tier)}
+                                                        alt={`${meta.name} knight portrait`}
+                                                        className="nft-tier-art"
+                                                        loading="lazy"
+                                                        decoding="async"
+                                                        width={128}
+                                                        height={128}
+                                                    />
+                                                    <span className="nft-tier-name" style={{ color: meta.color }}>
+                                                        {meta.name}
+                                                    </span>
+                                                    <span className="nft-tier-count nft-num">{fmtInt(byTier[tier])}</span>
+                                                    <span className="nft-tier-odds nft-num">
+                                                        {meta.hashPower} HP · {Math.round(meta.dropRate * 100)}% roll
+                                                    </span>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
-                                    {/* A wallet with no knights says so in the count above it. The two
-                                        notes that used to sit here advertised a price and an
-                                        incomplete read; the price is not this page's to print. */}
+                                    {knightList.length > 0 && (
+                                        <div className="nft-grid" aria-label="Your top knights">
+                                            {[...knightList]
+                                                .sort((a, b) => (b.hashPower || 0) - (a.hashPower || 0))
+                                                .slice(0, 6)
+                                                .map((k) => {
+                                                    const meta = RARITY[String(k.rarity || '').toUpperCase()];
+                                                    return (
+                                                        <NftCard
+                                                            key={k.tokenId}
+                                                            art={knightPfp(k.rarity)}
+                                                            badge={meta?.name}
+                                                            title={k.name || `Knight #${k.tokenId}`}
+                                                            tokenId={k.tokenId}
+                                                            hp={k.hashPower ?? meta?.hashPower}
+                                                            hpMin={15}
+                                                            hpMax={100}
+                                                            rarity={k.rarity}
+                                                            metaTop={meta ? `${meta.dungeonReward} DNG / run · ${meta.dailyRuns} runs` : null}
+                                                            metaBottom={meta ? `${Math.round(meta.dropRate * 100)}% drop` : null}
+                                                        />
+                                                    );
+                                                })}
+                                        </div>
+                                    )}
+                                    {knights.phase === 'ready' && knightList.length === 0 && (
+                                        <div className="nft-empty">
+                                            <span className="nft-empty-title">No Knights yet</span>
+                                            <p className="nft-empty-text">
+                                                Summon your first squad to clear dungeons and earn $DNG. Five tiers from Common to Legendary — every roll is on chain.
+                                            </p>
+                                            <div className="nft-empty-cta">
+                                                <a className="pf-link" href="/mint">Summon a Knight</a>
+                                                <a className="pf-link" href="/genesis">See Genesis (1,024 cap)</a>
+                                            </div>
+                                        </div>
+                                    )}
                                     {knights.data && !knights.data.complete && (
                                         <p className="pf-note">{knights.data.note}</p>
                                     )}
@@ -563,11 +611,44 @@ export default function PortfolioClient() {
                                     </ul>
                                 </div>
                             )}
+                            {genesis.phase === 'ready' && genesisList.length > 0 && (
+                                <div className="nft-grid" aria-label="Your Genesis knights">
+                                    {[...genesisList]
+                                        .sort((a, b) => (b.hashPower || 0) - (a.hashPower || 0))
+                                        .slice(0, 4)
+                                        .map((k) => {
+                                            const band = bandFor(k.hashPower);
+                                            return (
+                                                <NftCard
+                                                    key={k.tokenId}
+                                                    art={GENESIS_PFP}
+                                                    badge={band ? band.name : 'Genesis'}
+                                                    title={k.name || `Genesis #${k.tokenId}`}
+                                                    tokenId={k.tokenId}
+                                                    hp={k.hashPower}
+                                                    hpMin={300}
+                                                    hpMax={1000}
+                                                    rarity={null}
+                                                    isGenesis
+                                                    metaTop={band ? `${band.lo}–${band.hi} HP band` : 'Genesis collection'}
+                                                    metaBottom={k.hashPower != null ? `${k.hashPower} tickets / hour` : null}
+                                                />
+                                            );
+                                        })}
+                                </div>
+                            )}
                             {genesis.phase === 'ready' && !genesisList.length && !stake?.staked?.length && (
-                                <p className="pf-note">
-                                    This wallet holds no Genesis knights. The collection is capped at 1,024 and
-                                    mints on OpenSea, not here.
-                                </p>
+                                <div className="nft-empty">
+                                    <span className="nft-empty-title">No Genesis — 1,024 ever</span>
+                                    <p className="nft-empty-text">
+                                        Genesis Knights are the fixed-supply collection with 300–1,000 hash power, weekly $DNG yield and the only raffle entry.
+                                        {supply?.ok ? ` ${fmtInt(supply.minted)} of ${fmtInt(supply.max)} minted.` : ' Mint happens on OpenSea, not here.'}
+                                    </p>
+                                    <div className="nft-empty-cta">
+                                        <a className="pf-link" href="/genesis">View collection + odds</a>
+                                        <a className="pf-link" href="/staking">Open the vault</a>
+                                    </div>
+                                </div>
                             )}
                             <div className="pf-actions">
                                 <a className="pf-link" href="/staking">Genesis in the vault</a>
@@ -1012,17 +1093,18 @@ function CapsuleSpin({ spin = CAPSULE_SPIN }) {
                 alt=""
                 width={384}
                 height={384}
+                decoding="async"
                 draggable={false}
             />
         </div>
     );
 }
 
-function Row({ label, value, hint }) {
+function Row({ label, value, hint, live = false }) {
     return (
         <div className="pf-row">
             <dt>{label}</dt>
-            <dd>
+            <dd className="nft-live" aria-live={live ? 'polite' : undefined} aria-atomic={live ? 'true' : undefined}>
                 {value}
                 {hint ? <span className="pf-row-hint">{hint}</span> : null}
             </dd>

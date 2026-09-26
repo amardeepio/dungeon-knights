@@ -12,6 +12,15 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+    viewportFit: 'cover',
+    themeColor: '#12100E',
+};
+
 export default function StakingPage() {
   return <StakingClient />;
 }

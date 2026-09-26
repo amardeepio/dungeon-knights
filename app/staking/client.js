@@ -722,8 +722,9 @@ export default function StakingClient() {
             {/* Versioned like every other sheet: an unversioned `/theme.css` is a CSS change
                 that never reaches a returning player. */}
             <link rel="stylesheet" href="/theme.css?v=8" />
-            <link rel="stylesheet" href="/css/staking.css?v=9" />
+            <link rel="stylesheet" href="/css/staking.css?v=10" />
             <link rel="stylesheet" href="/css/arya.css?v=3" />
+            <link rel="stylesheet" href="/css/nft-ui.css?v=1" />
             {/* ethers v5 UMD, the same pinned copy every legacy page loads — first in the list,
                 because it is the one the others and this page sign with. It is loaded here rather
                 than bundled, because a second copy compiled into the React chunk is how
